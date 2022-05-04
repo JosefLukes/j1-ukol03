@@ -6,21 +6,49 @@ public class Pocitac {
     private Pamet ram;
     private Disk pevnyDisk;
 
+    public void vytvorSouborOVelikosti(long velikost) {
+        if (jeZapnuty) {
+            if ((pevnyDisk.getVyuziteMisto() + velikost)<= pevnyDisk.getKapacita()) {
+                pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() + velikost);
+                System.out.println("Disk má volné místo: " + (pevnyDisk.getKapacita() - pevnyDisk.getVyuziteMisto()));
+            } else {
+                System.out.println("Disk je plný");
+            }
+        } else {
+            System.out.println("Marná snaha, počítač je vypnutý");
+        }
+    }
+
+    public void vymazSouboryOVelikosti(long velikost) {
+        if (jeZapnuty) {
+            if ((pevnyDisk.getVyuziteMisto() - velikost)>= 0) {
+                pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() - velikost);
+                System.out.println("Disk má volné místo: " + (pevnyDisk.getKapacita() - pevnyDisk.getVyuziteMisto()));
+            } else {
+                System.out.println("Disk je prázdný");
+                pevnyDisk.setVyuziteMisto(0);
+            }
+
+        } else {
+            System.out.println("Marná snaha, počítač je vypnutý");
+        }
+    }
 
     public boolean jeZapnuty() {
         return jeZapnuty;
     }
+
     public void zapniSe() {
         if (jeZapnuty) {
             System.out.println("Počítač je již zapnutý");
 
         } else {
             System.out.println("Počítač je vypnutý, ale zapíná se ...");
-            if (cpu == null||ram==null||pevnyDisk==null) {
+            if (cpu == null || ram == null || pevnyDisk == null) {
                 System.out.println("Počítač nemůže nastartovat, zkontrolujte CPU, RAM, Pevny disk ");
             } else {
                 System.out.println("Počítač nastartoval a je zapnutý");
-                jeZapnuty= true;
+                jeZapnuty = true;
             }
         }
     }

@@ -37,10 +37,16 @@ public class HlavniProgram {
         pepuvPocitac.zapniSe();
         pepuvPocitac.zapniSe();      // Vypise chybu, protoze pocitac uz bezi
         System.out.println(pepuvPocitac.toString());
+        pepuvPocitac.vytvorSouborOVelikosti(100000);
+        System.out.println(pepuvPocitac.toString());
+        pepuvPocitac.vymazSouboryOVelikosti(100001);
+        System.out.println(pepuvPocitac.toString());
+
         pepuvPocitac.vypniSe();
 
         pepuvPocitac.vypniSe();      // Nevypise chybu, ale nic neprovede,
         pepuvPocitac.vypniSe();      // protoze pocitac je uz vypnuty
+        pepuvPocitac.vytvorSouborOVelikosti(100000);
     }
 
 }
