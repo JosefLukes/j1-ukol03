@@ -5,10 +5,55 @@ public class Pocitac {
     private Procesor cpu;// (budeme se tvářit, že počítač má jen jeden procesor s jendím jádrem)
     private Pamet ram;
     private Disk pevnyDisk;
+    private Disk druhyDisk;
+
+    public Disk getDruhyDisk() {
+        return druhyDisk;
+    }
+
+    public void setDruhyDisk(Disk druhyDisk) {
+        this.druhyDisk = druhyDisk;
+    }
+
+    public void vytvorSouborOVelikosti2Disky(long velikost) {
+        if (jeZapnuty) {
+
+            if ((pevnyDisk.getVyuziteMisto() + velikost) <= pevnyDisk.getKapacita()) {
+                pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() + velikost);
+                System.out.println("pevný disk má volné místo: " + (pevnyDisk.getKapacita() - pevnyDisk.getVyuziteMisto()));
+            } else if ((druhyDisk.getVyuziteMisto() + velikost) <= druhyDisk.getKapacita()) {
+                druhyDisk.setVyuziteMisto(druhyDisk.getVyuziteMisto() + velikost);
+                System.out.println("druhý disk má volné místo: " + (druhyDisk.getKapacita() - druhyDisk.getVyuziteMisto()));
+            } else {
+                System.out.println("oba disky je plné");
+            }
+
+        } else {
+            System.out.println("Marná snaha, počítač je vypnutý");
+        }
+    }
+
+    public void vymazSouborOVelikosti2Disky(long velikost) {
+        if (jeZapnuty) {
+            if ((druhyDisk.getVyuziteMisto() - velikost) >= 0) {
+                druhyDisk.setVyuziteMisto(druhyDisk.getVyuziteMisto() - velikost);
+                System.out.println("druhý disk má volné místo: " + (druhyDisk.getKapacita() - druhyDisk.getVyuziteMisto()));
+            } else if ((pevnyDisk.getVyuziteMisto() - velikost) >= 0) {
+                pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() - velikost);
+                System.out.println("pevný disk má volné místo: " + (pevnyDisk.getKapacita() - pevnyDisk.getVyuziteMisto()));
+            } else {
+                System.out.println("Oba disky je prázdné");
+            }
+
+        } else {
+            System.out.println("Marná snaha, počítač je vypnutý");
+        }
+
+    }
 
     public void vytvorSouborOVelikosti(long velikost) {
         if (jeZapnuty) {
-            if ((pevnyDisk.getVyuziteMisto() + velikost)<= pevnyDisk.getKapacita()) {
+            if ((pevnyDisk.getVyuziteMisto() + velikost) <= pevnyDisk.getKapacita()) {
                 pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() + velikost);
                 System.out.println("Disk má volné místo: " + (pevnyDisk.getKapacita() - pevnyDisk.getVyuziteMisto()));
             } else {
@@ -21,7 +66,7 @@ public class Pocitac {
 
     public void vymazSouboryOVelikosti(long velikost) {
         if (jeZapnuty) {
-            if ((pevnyDisk.getVyuziteMisto() - velikost)>= 0) {
+            if ((pevnyDisk.getVyuziteMisto() - velikost) >= 0) {
                 pevnyDisk.setVyuziteMisto(pevnyDisk.getVyuziteMisto() - velikost);
                 System.out.println("Disk má volné místo: " + (pevnyDisk.getKapacita() - pevnyDisk.getVyuziteMisto()));
             } else {
